@@ -52,7 +52,8 @@ exports.signinUser = catchAsync(async (req, res, next) => {
   const payload = {
     id: user._id,
     name: user.name,
-    email: user.email
+    email: user.email,
+    created: user.created
   };
   const { token, refresh_token } = generateTokens(payload);
   res.json({
@@ -65,14 +66,12 @@ exports.signinUser = catchAsync(async (req, res, next) => {
 exports.refreshAuth = catchAsync(async (req, res, next) => {
   const refreshToken = req.body.refreshToken;
   const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
-  if (decoded.type !== 'refresh') {
-    return next(new AppError('Invalid Token', 400));
-  }
   const user = await User.findById(decoded.id);
   const payload = {
     id: user._id,
     name: user.name,
-    email: user.email
+    email: user.email,
+    created: user.created
   };
   const { token, refresh_token } = generateTokens(payload);
   res.json({
