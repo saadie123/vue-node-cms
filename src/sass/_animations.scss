@@ -1,0 +1,76 @@
+// Fade animation
+.fade-enter-active {
+  animation: fadeIn 300ms ease-out forwards;
+}
+.fade-leave-active {
+  animation: fadeOut 300ms ease-out forwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+// Slide animation
+.slide-enter-active {
+  animation: slideIn 300ms ease forwards;
+}
+.slide-leave-active {
+  animation: slideOut 300ms ease-out forwards;
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(-150px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+@keyframes slideOut {
+  from {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(150px);
+    opacity: 0;
+  }
+}
+
+// Scale Y animation
+
+.scale-y-enter-active {
+  animation: scaleYIn 300ms ease-out forwards;
+}
+.scale-y-leave-active {
+  animation: scaleYOut 300ms ease-out forwards;
+}
+@keyframes scaleYIn {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes scaleYOut {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}

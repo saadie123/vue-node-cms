@@ -41,7 +41,7 @@ exports.signinUser = catchAsync(async (req, res, next) => {
     email: req.body.email
   });
   if (!user) {
-    errors.email = 'User does not exist';
+    errors.email = 'User with this email does not exist';
     return next(new AppError('Not Found', 404, errors));
   }
   const matched = await bcrypt.compare(req.body.password, user.password);

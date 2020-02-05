@@ -1,32 +1,45 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <transition name="fade" mode="out-in" appear>
+      <full-page-loader v-if="dataLoading"></full-page-loader>
+    </transition>
+    <transition name="fade" mode="out-in" appear>
+      <div v-if="!dataLoading">
+        <navbar></navbar>
+        <v-content class="mt-3">
+          <v-container>
+            <transition name="slide" mode="out-in" appear>
+              <router-view></router-view>
+            </transition>
+          </v-container>
+        </v-content>
+      </div>
+    </transition>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import HelloWorld from "./components/HelloWorld";
+import Navbar from "@/components/UI/Navbar";
+import FullPageLoader from "@/components/UI/FullPageLoader";
 
-#nav {
-  padding: 30px;
+export default {
+  name: "App",
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+  components: {
+    HelloWorld,
+    Navbar,
+    FullPageLoader
+  },
 
-    &.router-link-exact-active {
-      color: #42b983;
+  computed: {
+    dataLoading() {
+      return this.$store.getters.getLoadingUserData;
     }
+  },
+  created() {
+    this.$store.commit("setLoadingUserData", true);
+    this.$store.dispatch("autoSigninUser");
   }
-}
-</style>
+};
+</script>

@@ -28,6 +28,7 @@ const sendDevError = (err, res) => {
   statusCode = statusCode || 500;
   let response = {
     status: status,
+    code: statusCode,
     message: message,
     error: err,
     stack: stack
@@ -44,6 +45,7 @@ const sendProdError = (err, res) => {
     status = status || 'error';
     let response = {
       status: status,
+      code: statusCode,
       message: message
     };
     if (body) {
@@ -54,6 +56,7 @@ const sendProdError = (err, res) => {
     console.log('ERROR', err);
     res.status(500).json({
       status: 'error',
+      code: 500,
       message: 'Something went wrong'
     });
   }
